@@ -17,10 +17,10 @@ def encrypt(text):
             output += chr((ord(stng) + s - 97) % 26 + 97)
     return output
 
-class Todo(db.Model):
+class cipher(db.Model):
     id = db.Column(db.Integer,primary_key=True)
     text = db.Column(db.String(300),nullable=False)
-    encod = db.Column(db.String,nullable=False)
+    encod = db.Column(db.String)
     time = db.Column(db.DateTime)
     def __repr__(self):
         return '<Task %r>' % self.id
@@ -31,8 +31,8 @@ def Home():
     if request.method=='POST':
         text = request.form['text']
         encod = encrypt(text)
-        data1 = Todo(text=text)
-        data2 = Todo(encod=encod)
+        data1 = cipher(text=text)
+        data2 = cipher(encod=encod)
         try:
             db.session.add(data1)
             db.session.add(data2)
@@ -41,7 +41,7 @@ def Home():
         except:
             return 'There was a problem'
     else:
-        task = Todo.query.order_by(Todo.id).all()
+        task = cipher.query.order_by(cipher.id).all()
         return render_template('base.html',task=task)
 
 if __name__ == '__main__':
