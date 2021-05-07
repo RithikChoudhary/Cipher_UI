@@ -21,7 +21,7 @@ class Todo(db.Model):
     id = db.Column(db.Integer,primary_key=True)
     text = db.Column(db.String(300),nullable=False)
     encod = db.Column(db.String,nullable=False)
-    time = db.Column(db.DateTime,default=datetime.utcnow)
+    time = db.Column(db.DateTime)
     def __repr__(self):
         return '<Task %r>' % self.id
 
