@@ -31,11 +31,9 @@ def Home():
     if request.method=='POST':
         text = request.form['text']
         encod = encrypt(text)
-        data1 = cipher(text=text)
-        data2 = cipher(encod=encod)
+        data1 = cipher(text=text,encod=encod)
         try:
             db.session.add(data1)
-            db.session.add(data2)
             db.session.commit()
             return redirect('/')
         except:
